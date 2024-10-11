@@ -1,26 +1,22 @@
-
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int> dfs(int v,vector<int> adjlist[]){
-    queue<int> q;
-    q.push(0);
-    vector<bool> visited(v,0);
-    visited[0]=1;
-    vector<int> ans;
-    while(!q.empty()){
-        int node = q.front();
-        q.pop();
-        ans.push_back(node);
-        for(int i=0;i<adjlist[node].size();i++){
-            if(visited[adjlist[node][i]]==0){
-                visited[(adjlist[node][i])]=1;
-                q.push(adjlist[node][i]);
-            }
-        }
+void dfs_traversal(int node,vector<int> &ans,vector<int> adj[],vector<bool> &visited){
+    ans.push_back(node);
+    visited[node]=1;
+    for(int i=0;i<adj[node].size();i++){
+        if(!visited[adj[node][i]])
+            dfs_traversal(adj[node][i],ans,adj,visited);
     }
+}
+
+vector<int> dfs(int vertex,vector<int> adjlist[]){
+    vector<int> ans;
+    vector<bool> visited(vertex,0);
+    dfs_traversal(0,ans,adjlist,visited);
     return ans;
+
 }
 
 int main(){
@@ -48,6 +44,5 @@ int main(){
         cout<<val<<" ";
     }
     cout<<endl<<endl;
-
+    cout<<"23CE050_SAMARTH_KACHHADIYA";
 }
-
