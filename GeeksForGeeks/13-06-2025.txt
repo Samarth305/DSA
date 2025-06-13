@@ -1,0 +1,24 @@
+int kokoEat(vector<int>& arr, int k) {
+        // Code here
+        int maxBanana=INT_MIN;
+        for(auto &val:arr){
+            maxBanana=max(maxBanana,val);
+        }
+        int l=1,r=maxBanana;
+        int ans=0;
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            int noOfHrs=0;
+            for(auto val:arr){
+                noOfHrs+=(val+mid-1)/mid;
+            }
+            if(noOfHrs<=k){
+                ans=mid;
+                r=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+        }
+        return ans;
+    }
